@@ -1,0 +1,60 @@
+@startuml
+' uncomment the line below if you're using computer with a retina display
+' skinparam dpi 300
+!define Table(name,desc) class name as "desc" << (T,#FFAAAA) >>
+' we use bold for primary key
+' green color for unique
+' and underscore for not_null
+!define primary_key(x) <b>x</b>
+!define foreign_key(x) <u>x</u>
+!define unique(x) <color:blue>x</color>
+!define not_null(x) <u>x</u>
+' other tags available:
+' <i></i>
+' <back:COLOR></color>, where color is a color name or html color code
+' (#FFAACC)
+' see: http://plantuml.com/classes.html#More
+hide methods
+hide stereotypes
+
+' entities
+
+' relationships
+    Table(students,"students"){
+    primary_key(id) SERIAL
+    name VARCHAR[25]
+    unique(email) VARCHAR[20]
+    }
+
+    Table(course,"course")
+    {
+    primary_key(id) SERIAL
+    title VARCHAR [25]
+    }
+
+    Table(member,"students\n in\n course")
+    {
+        primary_key(student_id)
+        primary_key(course_id)
+        role INTEGER
+    }
+
+    students "1" --> "*" member
+    course "1" --> "*" member
+
+
+
+
+
+
+@enduml
+' one-to-one relationship
+user -- user_profile : "A user only \nhas one profile"
+' one to may relationship
+user --> session : "A user may have\n many sessions"
+' many to many relationship
+' Add mark if you like
+user "1" --> "*" user_group : "A user may be \nin many groups"
+group "1" --> "0..N" user_group : "A group may \ncontain many users"
+
+https://gist.github.com/QuantumGhost/0955a45383a0b6c0bc24f9654b3cb561
