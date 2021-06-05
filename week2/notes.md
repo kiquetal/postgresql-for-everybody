@@ -21,7 +21,20 @@
     AUTO_INCREMENT
     
 
+##### AUTO_INCREMENT   
 
+    CREATE TABLE users ( id SERIAL, name varchar(128), email varchar(128) UNIQUE,
+    primary key(id)
+    );
+
+
+#### Bonus
+
+    Load file from CSV.
+
+    wget https://www.pg4e.com/tools/sql/library.csv
+    curl -O https://www.pg4e.com/tools/sql/library.csv
+    \copy track_raw(title,artist,album,count,rating,len) FROM 'library.csv' WITH DELIMITER ',' CSV;
 
 
 #### Database Keys and Indexes in PostgreSQL.
